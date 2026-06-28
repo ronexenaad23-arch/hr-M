@@ -1,0 +1,44 @@
+{
+  "name": "الموارد الطبية - نظام HR",
+  "short_name": "موارد HR",
+  "description": "نظام إدارة الموارد البشرية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#00BDB4",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الموظفون",
+      "url": "/?page=employees"
+    },
+    {
+      "name": "الصيدليات",
+      "url": "/?page=pharmacies"
+    },
+    {
+      "name": "لوحة التحكم",
+      "url": "/?page=dashboard"
+    }
+  ]
+}
