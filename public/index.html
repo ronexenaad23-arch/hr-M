@@ -6,9 +6,12 @@
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="موارد HR"/>
 <meta name="theme-color" content="#00BDB4"/>
-<title>الموارد الطبية - HR</title>
 <link rel="manifest" href="/manifest.json"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
+<link rel="icon" type="image/png" href="/icon-192.png"/>
+<title>الموارد الطبية - HR</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
@@ -24,12 +27,31 @@ select option{background:#111827;color:#fff}
 </style>
 </head>
 <body>
-<div id="root"><div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#050505;flex-direction:column;gap:16px;font-family:sans-serif">
-<div style="width:44px;height:44px;border:3px solid #00BDB4;border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite"></div>
-<p style="color:#00BDB4;font-size:15px;font-weight:700;margin:0">الموارد الطبية</p>
-</div></div>
+<div id="root">
+  <div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#050505;flex-direction:column;gap:16px;font-family:sans-serif">
+    <div style="width:48px;height:48px;border:3px solid #00BDB4;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+    <p style="color:#00BDB4;font-size:17px;font-weight:700;margin:0">الموارد الطبية</p>
+    <p style="color:#555;font-size:12px;margin:0">HR System v5</p>
+  </div>
+</div>
 <script>
-if("serviceWorker"in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
+// Clear old localStorage on version change to load fresh data
+(function(){
+  var VER='hr-v5-2026-06-29';
+  if(localStorage.getItem('__hr_ver')!==VER){
+    Object.keys(localStorage).filter(function(k){return k.startsWith('hr_');}).forEach(function(k){localStorage.removeItem(k);});
+    localStorage.setItem('__hr_ver',VER);
+    console.log('[HR] Fresh start v5');
+  }
+})();
+// PWA Service Worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js',{scope:'/'})
+      .then(function(r){console.log('[SW] Registered:',r.scope);})
+      .catch(function(e){console.warn('[SW] Failed:',e);});
+  });
+}
 </script>
 <script src="/app.js"></script>
 </body>
