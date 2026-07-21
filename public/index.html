@@ -7,16 +7,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="موارد HR"/>
-<meta name="application-name" content="موارد HR"/>
 <meta name="theme-color" content="#00BDB4"/>
 <link rel="manifest" href="/manifest.json"/>
-<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png"/>
-<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <title>الموارد الطبية - HR</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;transition:background 0.3s,color 0.3s}
 #root{min-height:100vh}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -37,47 +35,24 @@ select option{background:#111827;color:#fff}
   </div>
 </div>
 <script>
-/* ── Version-based data reset (keeps session/theme/lang) ── */
+/* Version-based localStorage clear */
 (function(){
-  var VER='hr-v6-2026-07-12';
+  var VER='hr-v6-2026-07-03';
   if(localStorage.getItem('__hr_ver')!==VER){
-    var keep=['__hr_ver','hr_session','hr_theme','hr_lang','hr_notes','hr_reminders'];
     Object.keys(localStorage).filter(function(k){
-      return k.startsWith('hr_') && keep.indexOf(k)===-1;
-    }).forEach(function(k){ localStorage.removeItem(k); });
+      return k.startsWith('hr_') && k!=='hr_session' && k!=='hr_theme' && k!=='hr_lang';
+    }).forEach(function(k){localStorage.removeItem(k);});
     localStorage.setItem('__hr_ver',VER);
-    console.log('[HR] v6 initialized');
   }
 })();
-
-/* ── PWA Service Worker ── */
+/* PWA Service Worker */
 if('serviceWorker' in navigator){
-  window.addEventListener('load', function(){
-    navigator.serviceWorker.register('/sw.js', {scope:'/'})
-      .then(function(reg){
-        console.log('[SW] Registered. Scope:', reg.scope);
-        reg.addEventListener('updatefound', function(){
-          console.log('[SW] New version available');
-        });
-      })
-      .catch(function(err){ console.warn('[SW] Failed:', err); });
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js',{scope:'/'})
+      .then(function(r){console.log('[SW]',r.scope);})
+      .catch(function(e){console.warn('[SW]',e);});
   });
 }
-
-/* ── PWA Install Prompt (capture before page uses it) ── */
-window.__pwaPrompt = null;
-window.addEventListener('beforeinstallprompt', function(e){
-  e.preventDefault();
-  window.__pwaPrompt = e;
-  console.log('[PWA] Install prompt ready');
-  // Dispatch custom event so React can pick it up
-  window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
-});
-window.addEventListener('appinstalled', function(){
-  window.__pwaPrompt = null;
-  console.log('[PWA] Installed successfully!');
-  window.dispatchEvent(new CustomEvent('pwa-installed'));
-});
 </script>
 <script src="/app.js"></script>
 </body>

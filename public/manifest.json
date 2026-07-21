@@ -1,14 +1,10 @@
 {
-  "name": "الموارد الطبية - نظام إدارة الموارد البشرية",
+  "name": "الموارد الطبية - نظام HR",
   "short_name": "موارد HR",
-  "description": "نظام إدارة الموارد البشرية للموارد الطبية للصيدليات",
+  "description": "نظام إدارة الموارد البشرية للموارد الطبية",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
   "background_color": "#050505",
   "theme_color": "#00BDB4",
   "orientation": "any",
@@ -47,7 +43,6 @@
   "shortcuts": [
     {
       "name": "لوحة التحكم",
-      "short_name": "Dashboard",
       "url": "/",
       "icons": [
         {
@@ -58,7 +53,6 @@
     },
     {
       "name": "الموظفون",
-      "short_name": "Employees",
       "url": "/",
       "icons": [
         {
@@ -69,7 +63,6 @@
     },
     {
       "name": "الملاحظات",
-      "short_name": "Notes",
       "url": "/",
       "icons": [
         {
@@ -79,8 +72,5 @@
       ]
     }
   ],
-  "prefer_related_applications": false,
-  "edge_side_panel": {
-    "preferred_width": 400
-  }
+  "prefer_related_applications": false
 }
