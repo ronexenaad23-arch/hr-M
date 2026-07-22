@@ -7,14 +7,16 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="موارد HR"/>
+<meta name="application-name" content="موارد HR"/>
 <meta name="theme-color" content="#00BDB4"/>
 <link rel="manifest" href="/manifest.json"/>
-<link rel="apple-touch-icon" href="/icon-192.png"/>
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png"/>
+<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <title>الموارد الطبية - HR</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;transition:background 0.3s,color 0.3s}
+body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 #root{min-height:100vh}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -35,17 +37,19 @@ select option{background:#111827;color:#fff}
   </div>
 </div>
 <script>
-/* Version-based localStorage clear */
+/* نسخة 2026-07-22 — تمسح البيانات القديمة وتحافظ على الجلسة/الثيم/اللغة */
 (function(){
-  var VER='hr-v6-2026-07-03';
+  var VER='hr-v6-2026-07-22';
   if(localStorage.getItem('__hr_ver')!==VER){
+    var keep=['__hr_ver','hr_session','hr_theme','hr_lang','hr_notes','hr_reminders'];
     Object.keys(localStorage).filter(function(k){
-      return k.startsWith('hr_') && k!=='hr_session' && k!=='hr_theme' && k!=='hr_lang';
+      return k.startsWith('hr_')&&keep.indexOf(k)===-1;
     }).forEach(function(k){localStorage.removeItem(k);});
     localStorage.setItem('__hr_ver',VER);
+    console.log('[HR] v6 initialized');
   }
 })();
-/* PWA Service Worker */
+/* Service Worker للـ PWA */
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('/sw.js',{scope:'/'})
@@ -53,6 +57,17 @@ if('serviceWorker' in navigator){
       .catch(function(e){console.warn('[SW]',e);});
   });
 }
+/* التقاط حدث التثبيت */
+window.__pwaPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();
+  window.__pwaPrompt=e;
+  window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
+});
+window.addEventListener('appinstalled',function(){
+  window.__pwaPrompt=null;
+  window.dispatchEvent(new CustomEvent('pwa-installed'));
+});
 </script>
 <script src="/app.js"></script>
 </body>
