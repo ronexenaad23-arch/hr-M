@@ -37,37 +37,51 @@ select option{background:#111827;color:#fff}
   </div>
 </div>
 <script>
-/* نسخة 2026-07-22 — تمسح البيانات القديمة وتحافظ على الجلسة/الثيم/اللغة */
+/* Version clear — keeps session/theme/lang/notes */
 (function(){
-  var VER='hr-v6-2026-07-22';
+  var VER='hr-v6-2026-07-23';
   if(localStorage.getItem('__hr_ver')!==VER){
     var keep=['__hr_ver','hr_session','hr_theme','hr_lang','hr_notes','hr_reminders'];
     Object.keys(localStorage).filter(function(k){
       return k.startsWith('hr_')&&keep.indexOf(k)===-1;
     }).forEach(function(k){localStorage.removeItem(k);});
     localStorage.setItem('__hr_ver',VER);
-    console.log('[HR] v6 initialized');
+    console.log('[HR] v6 ready');
   }
 })();
-/* Service Worker للـ PWA */
-if('serviceWorker' in navigator){
-  window.addEventListener('load',function(){
-    navigator.serviceWorker.register('/sw.js',{scope:'/'})
-      .then(function(r){console.log('[SW]',r.scope);})
-      .catch(function(e){console.warn('[SW]',e);});
-  });
-}
-/* التقاط حدث التثبيت */
-window.__pwaPrompt=null;
-window.addEventListener('beforeinstallprompt',function(e){
+
+/* ── PWA: capture install prompt ASAP before app.js loads ── */
+window.__pwaPrompt = null;
+window.__pwaInstalled = window.matchMedia('(display-mode: standalone)').matches
+                     || navigator.standalone === true;
+
+window.addEventListener('beforeinstallprompt', function(e) {
   e.preventDefault();
-  window.__pwaPrompt=e;
+  window.__pwaPrompt = e;
+  console.log('[PWA] ✅ Install prompt captured!');
+  // Notify React app if already loaded
   window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
 });
-window.addEventListener('appinstalled',function(){
-  window.__pwaPrompt=null;
+
+window.addEventListener('appinstalled', function() {
+  window.__pwaPrompt = null;
+  window.__pwaInstalled = true;
+  console.log('[PWA] ✅ App installed!');
   window.dispatchEvent(new CustomEvent('pwa-installed'));
 });
+
+/* ── Service Worker ── */
+if('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', {scope:'/'})
+      .then(function(reg) {
+        console.log('[SW] ✅ Registered:', reg.scope);
+        // Check for updates
+        reg.update();
+      })
+      .catch(function(e) { console.warn('[SW] Failed:', e); });
+  });
+}
 </script>
 <script src="/app.js"></script>
 </body>
