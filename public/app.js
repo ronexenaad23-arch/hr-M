@@ -198,7 +198,53 @@ return()=>window.removeEventListener("beforeinstallprompt",D)},[]),(0,o.useEffec
     strokeLinecap:"round",strokeLinejoin:"round",
     style:{transition:"transform 0.25s ease",transform:c?"rotate(0deg)":"rotate(180deg)"}
   },
-  o.default.createElement("polyline",{points:"15 18 9 12 15 6"})))),o.default.createElement("div",{style:{flex:1,marginRight:E?"0":`${z}px`,padding:E?"14px 12px 80px":O?"20px 18px":"24px 28px",overflowY:"auto",minHeight:"100vh",transition:"margin-right 0.25s ease",maxWidth:"100%",boxSizing:"border-box"}},o.default.createElement(W,{setPage:s}))),E&&o.default.createElement(wg,{page:r,setPage:s,counts:We}),!A&&(g||E&&/Safari/.test(navigator.userAgent)&&!/Chrome/.test(navigator.userAgent))&&o.default.createElement("div",{id:"pwa-banner",style:{position:"fixed",bottom:E?"70px":"24px",left:"50%",transform:"translateX(-50%)",zIndex:500,maxWidth:"92vw",width:"360px",pointerEvents:"auto"}},g?o.default.createElement("div",{style:{background:`linear-gradient(135deg,${u.teal},${u.purple})`,borderRadius:"16px",padding:"14px 18px",display:"flex",alignItems:"center",gap:"12px",boxShadow:"0 8px 32px rgba(0,189,180,0.4)",animation:"slideUp 0.4s ease"}},o.default.createElement("span",{style:{fontSize:"28px",flexShrink:0}},"\u{1F4F2}"),o.default.createElement("div",{style:{flex:1}},o.default.createElement("p",{style:{margin:0,color:"#fff",fontSize:"14px",fontWeight:700}},"\u062B\u0628\u0651\u062A \u0627\u0644\u062A\u0637\u0628\u064A\u0642"),o.default.createElement("p",{style:{margin:"2px 0 0",color:"rgba(255,255,255,0.8)",fontSize:"11px"}},"\u0623\u0636\u0641 \u0627\u0644\u0646\u0638\u0627\u0645 \u0644\u0634\u0627\u0634\u0629 \u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629 \u0644\u0644\u0648\u0635\u0648\u0644 \u0627\u0644\u0633\u0631\u064A\u0639")),o.default.createElement("div",{style:{display:"flex",gap:"6px",flexShrink:0}},o.default.createElement("button",{onClick:async()=>{if(!g)return;g.prompt();let{outcome:D}=await g.userChoice;D==="accepted"&&M(!0),h(null)},style:{background:"#fff",color:u.teal,border:"none",borderRadius:"10px",padding:"8px 16px",fontSize:"13px",fontWeight:800,cursor:"pointer",boxShadow:"0 2px 8px rgba(0,0,0,0.2)"}},"\u{1F4F2} \u062A\u062B\u0628\u064A\u062A"),o.default.createElement("button",{onClick:()=>h(null),style:{background:"rgba(255,255,255,0.2)",color:"#fff",border:"none",borderRadius:"10px",padding:"8px 10px",fontSize:"14px",cursor:"pointer"}},"\u2715"))):!installed&&E&&/Safari/.test(navigator.userAgent)&&!/Chrome/.test(navigator.userAgent)?o.default.createElement("div",{style:{background:u.card,border:`1px solid ${u.teal}50`,borderRadius:"16px",padding:"14px 18px",boxShadow:"0 8px 32px rgba(0,0,0,0.4)"}},o.default.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"10px"}},o.default.createElement("p",{style:{margin:0,color:u.teal,fontSize:"14px",fontWeight:700}},"\u{1F4F2} \u062A\u062B\u0628\u064A\u062A \u0639\u0644\u0649 iPhone"),o.default.createElement("button",{onClick:()=>M(!0),style:{background:"none",border:"none",color:u.muted,cursor:"pointer",fontSize:"16px"}},"\u2715")),o.default.createElement("div",{style:{display:"flex",flexDirection:"column",gap:"6px"}},[{i:"1\uFE0F\u20E3",t:'\u0627\u0636\u063A\u0637 \u0632\u0631 "\u0645\u0634\u0627\u0631\u0643\u0629"',d:"\u0623\u0633\u0641\u0644 \u0627\u0644\u0645\u062A\u0635\u0641\u062D \uFF07\u2B06\uFE0F\uFF07"},{i:"2\uFE0F\u20E3",t:'"\u0625\u0636\u0627\u0641\u0629 \u0644\u0644\u0634\u0627\u0634\u0629 \u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629"',d:"Add to Home Screen"},{i:"3\uFE0F\u20E3",t:"\u0627\u0636\u063A\u0637 \u0625\u0636\u0627\u0641\u0629",d:"Add \u0641\u064A \u0627\u0644\u0632\u0627\u0648\u064A\u0629 \u0627\u0644\u0639\u0644\u0648\u064A\u0629"}].map(D=>o.default.createElement("div",{key:D.i,style:{display:"flex",gap:"8px",alignItems:"center"}},o.default.createElement("span",{style:{fontSize:"16px"}},D.i),o.default.createElement("div",null,o.default.createElement("p",{style:{margin:0,color:u.text,fontSize:"12px",fontWeight:600}},D.t),o.default.createElement("p",{style:{margin:0,color:u.muted,fontSize:"10px"}},D.d)))))):null),o.default.createElement("style",null,`
+  o.default.createElement("polyline",{points:"15 18 9 12 15 6"})))),o.default.createElement("div",{style:{flex:1,marginRight:E?"0":`${z}px`,padding:E?"14px 12px 80px":O?"20px 18px":"24px 28px",overflowY:"auto",minHeight:"100vh",transition:"margin-right 0.25s ease",maxWidth:"100%",boxSizing:"border-box"}},o.default.createElement(W,{setPage:s}))),E&&o.default.createElement(wg,{page:r,setPage:s,counts:We}),!A&&o.default.createElement(o.default.Fragment,null,
+      g&&o.default.createElement("div",{style:{position:"fixed",bottom:E?"70px":"24px",left:"50%",transform:"translateX(-50%)",zIndex:500,width:"min(380px,92vw)",animation:"slideUp 0.4s ease"}},
+        o.default.createElement("div",{style:{background:`linear-gradient(135deg,${u.teal},${u.purple})`,borderRadius:"18px",padding:"16px 20px",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 8px 32px ${u.teal}50,0 2px 8px rgba(0,0,0,0.3)`}},
+          o.default.createElement("div",{style:{width:"48px",height:"48px",borderRadius:"14px",background:"rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"24px",flexShrink:0}},"\uD83D\uDCF2"),
+          o.default.createElement("div",{style:{flex:1}},
+            o.default.createElement("p",{style:{margin:0,color:"#fff",fontSize:"15px",fontWeight:800}},d==="ar"?"ثبّت التطبيق":"Install App"),
+            o.default.createElement("p",{style:{margin:"3px 0 0",color:"rgba(255,255,255,0.85)",fontSize:"11px"}},d==="ar"?"وصول سريع من شاشة الجوال":"Quick access from home screen")
+          ),
+          o.default.createElement("div",{style:{display:"flex",flexDirection:"column",gap:"6px",flexShrink:0}},
+            o.default.createElement("button",{
+              onClick:async()=>{if(!g)return;g.prompt();let{outcome:D}=await g.userChoice;D==="accepted"&&M(!0);h(null)},
+              style:{background:"#fff",color:u.teal,border:"none",borderRadius:"10px",padding:"9px 18px",fontSize:"13px",fontWeight:800,cursor:"pointer",boxShadow:"0 2px 8px rgba(0,0,0,0.2)",whiteSpace:"nowrap"}
+            },d==="ar"?"تثبيت ✓":"Install ✓"),
+            o.default.createElement("button",{
+              onClick:()=>h(null),
+              style:{background:"rgba(255,255,255,0.15)",color:"rgba(255,255,255,0.9)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:"10px",padding:"6px 12px",fontSize:"11px",cursor:"pointer",textAlign:"center"}
+            },d==="ar"?"لاحقاً":"Later")
+          )
+        )
+      ),
+      o.default.createElement("div",{
+        style:{position:"fixed",bottom:E?"76px":"80px",right:"16px",zIndex:490}},
+        o.default.createElement("button",{
+          onClick:()=>{
+            if(g){g.prompt();g.userChoice.then(r=>{if(r.outcome==="accepted")M(!0);h(null);});}
+            else{
+              let msg=navigator.userAgent.includes("iPhone")||navigator.userAgent.includes("iPad")
+                ?"\uD83C\uDF4E iPhone:\n1. اضغط زر المشاركة \u2B06\uFE0F\n2. إضافة للشاشة الرئيسية\n3. اضغط إضافة \u2705"
+                :"\uD83E\uDD16 Android / Chrome:\n1. افتح \u22EE القائمة\n2. إضافة إلى الشاشة الرئيسية\n3. اضغط إضافة \u2705\n\n\u26A0\uFE0F يحتاج HTTPS (Netlify)";
+              alert(msg);
+            }
+          },
+          title:d==="ar"?"تثبيت كتطبيق":"Install as App",
+          style:{
+            width:"52px",height:"52px",borderRadius:"50%",
+            background:`linear-gradient(135deg,${u.teal},${u.purple})`,
+            border:"none",color:"#fff",
+            cursor:"pointer",
+            display:"flex",alignItems:"center",justifyContent:"center",
+            boxShadow:`0 4px 20px ${u.teal}60`,
+            fontSize:"22px",
+            animation:"pulse-pwa 2s infinite"
+          }
+        },"\uD83D\uDCF2")
+      ),
+      o.default.createElement("style",null,"@keyframes pulse-pwa{0%,100%{box-shadow:0 4px 20px rgba(0,189,180,0.6)}50%{box-shadow:0 4px 30px rgba(0,189,180,0.9),0 0 0 8px rgba(0,189,180,0.1)}}")
+    ),o.default.createElement("style",null,`
           @keyframes slideUp { from { opacity:0; transform:translateX(-50%) translateY(20px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
         `),U&&o.default.createElement(Lg,{user:i,onClose:()=>x(!1),onSave:D=>{B.update("hr_users",i.id,D),a(T(T({},i),D)),x(!1)}}),b&&o.default.createElement(Bg,{onClose:()=>L(!1),setPage:D=>{s(D),L(!1)}}))))}s0.default.createRoot(document.getElementById("root")).render(o.default.createElement(Vg));})();
 /*! Bundled license information:
