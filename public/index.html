@@ -4,66 +4,63 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 
-<!-- ══ Open Graph (WhatsApp, Twitter, LinkedIn, Telegram) ══ -->
-<meta property="og:type"        content="website"/>
-<meta property="og:url"         content="https://hrmawared.netlify.app/"/>
-<meta property="og:title"       content="الموارد الطبية - نظام إدارة الموارد البشرية"/>
-<meta property="og:description" content="نظام متكامل لإدارة الموارد البشرية للموارد الطبية للصيدليات | 46 موظف | 17 فرع"/>
-<meta property="og:image"       content="https://hrmawared.netlify.app/og-image.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta property="og:image:type"  content="image/png"/>
-<meta property="og:image:alt"   content="الموارد الطبية HR System"/>
-<meta property="og:locale"      content="ar_SA"/>
-<meta property="og:site_name"   content="الموارد الطبية"/>
-
-<!-- ══ Twitter Card ══ -->
-<meta name="twitter:card"        content="summary_large_image"/>
-<meta name="twitter:title"       content="الموارد الطبية - نظام HR"/>
-<meta name="twitter:description" content="نظام متكامل لإدارة الموارد البشرية للموارد الطبية"/>
-<meta name="twitter:image"       content="https://hrmawared.netlify.app/og-image.png"/>
-
-<!-- ══ PWA & App ══ -->
+<!-- PWA -->
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="موارد HR"/>
 <meta name="application-name" content="موارد HR"/>
 <meta name="theme-color" content="#00BDB4"/>
-<meta name="description" content="نظام متكامل لإدارة الموارد البشرية للموارد الطبية للصيدليات"/>
+<meta name="msapplication-TileColor" content="#00BDB4"/>
+<meta name="msapplication-TileImage" content="/icon-144.png"/>
 
+<!-- Icons -->
 <link rel="manifest" href="/manifest.json"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-96.png"/>
+<link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png"/>
+<link rel="apple-touch-icon" href="/icon-152.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-152.png"/>
 <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png"/>
-<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png"/>
-<link rel="icon" type="image/png" href="/icon-192.png"/>
 
-<title>الموارد الطبية - HR System</title>
+<!-- OG / Social -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://hrmawared.netlify.app/"/>
+<meta property="og:title" content="الموارد الطبية - نظام إدارة الموارد البشرية"/>
+<meta property="og:description" content="نظام متكامل لإدارة الموارد البشرية | 46 موظف | 17 فرع"/>
+<meta property="og:image" content="https://hrmawared.netlify.app/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:locale" content="ar_SA"/>
+<meta property="og:site_name" content="الموارد الطبية"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hrmawared.netlify.app/og-image.png"/>
+
+<title>الموارد الطبية - HR</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 #root{min-height:100vh}
 ::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:#00BDB4}
 input,select,textarea,button{font-family:inherit}
 select option{background:#111827;color:#fff}
-@media(max-width:768px){table{font-size:11px!important}h2{font-size:16px!important}}
+@media(max-width:768px){table{font-size:11px!important}}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <div id="root">
-  <div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#050505;flex-direction:column;gap:16px;font-family:sans-serif">
+  <div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#050505;flex-direction:column;gap:16px">
     <div style="width:48px;height:48px;border:3px solid #00BDB4;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+    <img src="/icon-192.png" style="width:60px;height:60px;border-radius:14px;margin-top:8px" onerror="this.style.display='none'"/>
     <p style="color:#00BDB4;font-size:17px;font-weight:700;margin:0">الموارد الطبية</p>
-    <p style="color:#555;font-size:12px;margin:4px 0 0">HR System v6</p>
+    <p style="color:#555;font-size:12px;margin:0">HR System</p>
   </div>
 </div>
 <script>
-/* Version clear — keeps session/theme/lang/notes/reminders */
 (function(){
-  var VER='hr-v6-2026-07-27';
+  var VER='hr-v6.1-2026-07-28';
   if(localStorage.getItem('__hr_ver')!==VER){
     var keep=['__hr_ver','hr_session','hr_theme','hr_lang','hr_notes','hr_reminders'];
     Object.keys(localStorage).filter(function(k){
@@ -72,23 +69,32 @@ select option{background:#111827;color:#fff}
     localStorage.setItem('__hr_ver',VER);
   }
 })();
-/* PWA: capture install prompt */
+/* PWA: capture install prompt immediately */
 window.__pwaPrompt=null;
-window.__pwaInstalled=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+window.__pwaInstalled=
+  window.matchMedia('(display-mode:standalone)').matches||
+  navigator.standalone===true||
+  document.referrer.includes('android-app://');
 window.addEventListener('beforeinstallprompt',function(e){
-  e.preventDefault();window.__pwaPrompt=e;
+  e.preventDefault();
+  window.__pwaPrompt=e;
   window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
+  console.log('[PWA] ✅ Install prompt ready!');
 });
 window.addEventListener('appinstalled',function(){
-  window.__pwaPrompt=null;window.__pwaInstalled=true;
+  window.__pwaPrompt=null;
+  window.__pwaInstalled=true;
   window.dispatchEvent(new CustomEvent('pwa-installed'));
+  console.log('[PWA] ✅ Installed!');
 });
 /* Service Worker */
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('/sw.js',{scope:'/'})
-      .then(function(r){console.log('[SW]',r.scope);r.update();})
-      .catch(function(e){console.warn('[SW]',e);});
+      .then(function(r){
+        console.log('[SW] ✅',r.scope);
+        r.update();
+      }).catch(function(e){console.warn('[SW]',e);});
   });
 }
 </script>
