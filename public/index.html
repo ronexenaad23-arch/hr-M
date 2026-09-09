@@ -3,38 +3,24 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-
-<!-- PWA -->
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="موارد HR"/>
 <meta name="application-name" content="موارد HR"/>
 <meta name="theme-color" content="#00BDB4"/>
-<meta name="msapplication-TileColor" content="#00BDB4"/>
-<meta name="msapplication-TileImage" content="/icon-144.png"/>
-
-<!-- Icons -->
-<link rel="manifest" href="/manifest.json"/>
-<link rel="icon" type="image/png" sizes="32x32" href="/icon-96.png"/>
-<link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png"/>
-<link rel="apple-touch-icon" href="/icon-152.png"/>
-<link rel="apple-touch-icon" sizes="152x152" href="/icon-152.png"/>
-<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png"/>
-
-<!-- OG / Social -->
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://hrmawared.netlify.app/"/>
-<meta property="og:title" content="الموارد الطبية - نظام إدارة الموارد البشرية"/>
+<meta property="og:title" content="الموارد الطبية - نظام HR"/>
 <meta property="og:description" content="نظام متكامل لإدارة الموارد البشرية | 46 موظف | 17 فرع"/>
 <meta property="og:image" content="https://hrmawared.netlify.app/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:locale" content="ar_SA"/>
-<meta property="og:site_name" content="الموارد الطبية"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://hrmawared.netlify.app/og-image.png"/>
-
+<link rel="manifest" href="/manifest.json"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
+<link rel="icon" type="image/png" href="/icon-192.png"/>
 <title>الموارد الطبية - HR</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -45,59 +31,77 @@ body{background:#050505;font-family:"Segoe UI",Tahoma,Arial,sans-serif;overflow-
 ::-webkit-scrollbar-thumb:hover{background:#00BDB4}
 input,select,textarea,button{font-family:inherit}
 select option{background:#111827;color:#fff}
-@media(max-width:768px){table{font-size:11px!important}}
+@media(max-width:768px){table{font-size:11px!important}h2{font-size:16px!important}}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <div id="root">
-  <div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#050505;flex-direction:column;gap:16px">
+  <div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#050505;flex-direction:column;gap:16px;font-family:sans-serif">
     <div style="width:48px;height:48px;border:3px solid #00BDB4;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
-    <img src="/icon-192.png" style="width:60px;height:60px;border-radius:14px;margin-top:8px" onerror="this.style.display='none'"/>
-    <p style="color:#00BDB4;font-size:17px;font-weight:700;margin:0">الموارد الطبية</p>
-    <p style="color:#555;font-size:12px;margin:0">HR System</p>
+    <img src="/icon-192.png" style="width:56px;height:56px;border-radius:14px;margin-top:4px" onerror="this.style.display='none'"/>
+    <p style="color:#00BDB4;font-size:17px;font-weight:700;margin:0">&#x627;&#x644;&#x645;&#x648;&#x627;&#x631;&#x62F; &#x627;&#x644;&#x637;&#x628;&#x64A;&#x629;</p>
+    <p style="color:#555;font-size:12px;margin:0">HR System v6.1</p>
   </div>
 </div>
 <script>
+/* ── Force clear old SW caches then reload ── */
 (function(){
-  var VER='hr-v6.1-2026-07-28';
-  if(localStorage.getItem('__hr_ver')!==VER){
-    var keep=['__hr_ver','hr_session','hr_theme','hr_lang','hr_notes','hr_reminders'];
-    Object.keys(localStorage).filter(function(k){
-      return k.startsWith('hr_')&&keep.indexOf(k)===-1;
-    }).forEach(function(k){localStorage.removeItem(k);});
-    localStorage.setItem('__hr_ver',VER);
+  var VER = 'hr-v6.1-2026-09-07';
+  var stored = localStorage.getItem('__hr_ver');
+  if(stored !== VER){
+    /* Clear old employee/pharmacy data but keep user prefs */
+    var keep = ['__hr_ver','hr_session','hr_theme','hr_lang',
+                'hr_notes','hr_reminders','hr_requests'];
+    Object.keys(localStorage).forEach(function(k){
+      if(k.startsWith('hr_') && keep.indexOf(k) === -1){
+        localStorage.removeItem(k);
+      }
+    });
+    localStorage.setItem('__hr_ver', VER);
+    /* Clear old service worker caches */
+    if('caches' in window){
+      caches.keys().then(function(names){
+        names.forEach(function(name){ caches.delete(name); });
+      });
+    }
   }
 })();
-/* PWA: capture install prompt immediately */
-window.__pwaPrompt=null;
-window.__pwaInstalled=
-  window.matchMedia('(display-mode:standalone)').matches||
-  navigator.standalone===true||
-  document.referrer.includes('android-app://');
-window.addEventListener('beforeinstallprompt',function(e){
+
+/* ── PWA install prompt ── */
+window.__pwaPrompt = null;
+window.__pwaInstalled =
+  window.matchMedia('(display-mode: standalone)').matches ||
+  navigator.standalone === true;
+window.addEventListener('beforeinstallprompt', function(e){
   e.preventDefault();
-  window.__pwaPrompt=e;
+  window.__pwaPrompt = e;
   window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
-  console.log('[PWA] ✅ Install prompt ready!');
 });
-window.addEventListener('appinstalled',function(){
-  window.__pwaPrompt=null;
-  window.__pwaInstalled=true;
+window.addEventListener('appinstalled', function(){
+  window.__pwaPrompt = null;
+  window.__pwaInstalled = true;
   window.dispatchEvent(new CustomEvent('pwa-installed'));
-  console.log('[PWA] ✅ Installed!');
 });
-/* Service Worker */
+
+/* ── Service Worker ── */
 if('serviceWorker' in navigator){
-  window.addEventListener('load',function(){
-    navigator.serviceWorker.register('/sw.js',{scope:'/'})
-      .then(function(r){
-        console.log('[SW] ✅',r.scope);
-        r.update();
-      }).catch(function(e){console.warn('[SW]',e);});
+  window.addEventListener('load', function(){
+    /* First unregister old SW to force fresh start */
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      var unregPromises = regs.map(function(r){ return r.unregister(); });
+      return Promise.all(unregPromises);
+    }).then(function(){
+      /* Register fresh SW */
+      return navigator.serviceWorker.register('/sw.js', {scope:'/'});
+    }).then(function(reg){
+      console.log('[SW] Fresh registration:', reg.scope);
+    }).catch(function(e){
+      console.warn('[SW] Failed:', e);
+    });
   });
 }
 </script>
-<script src="/app.js"></script>
+<script src="/app.js?v=20260907"></script>
 </body>
 </html>
