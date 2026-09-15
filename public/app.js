@@ -233,18 +233,26 @@ var Requests=function(){
   var submit=function(){
     if(!form.title.trim()||!form.details.trim())return alert("\u064A\u0631\u062C\u0649 \u0645\u0644\u0621 \u0627\u0644\u0639\u0646\u0648\u0627\u0646 \u0648\u0627\u0644\u062A\u0641\u0627\u0635\u064A\u0644");
     var all=JSON.parse(localStorage.getItem("hr_requests")||"[]");
+    var empData=B.get("hr_employees").find(function(emp){return emp.id===cu.id;})||{};
     all.unshift({id:Date.now(),type:form.type,title:form.title,details:form.details,
       startDate:form.startDate,endDate:form.endDate,days:form.days,amount:form.amount,
       employeeId:cu.id,employeeName:cu.name,employeeRole:role,
-      status:"pending",createdAt:new Date().toISOString(),
-      managerNote:"",adminNote:"",managerDate:null,adminDate:null});
+      employeeIdNumber:empData.iqamaNumber||empData.passportNumber||String(cu.id),
+      employeePhone:empData.phone||"",
+      employeeDept:empData.department||empData.position||"",
+      employeeLocation:empData.location||"",
+      status:role==="admin"?"approved":"pending",
+      createdAt:new Date().toISOString(),
+      managerNote:"",adminNote:role==="admin"?"\u0645\u0639\u062A\u0645\u062F \u0645\u0646 \u0627\u0644\u0645\u062F\u064A\u0631 \u0627\u0644\u0639\u0627\u0645":"",
+      managerDate:role==="admin"?new Date().toISOString():null,
+      adminDate:role==="admin"?new Date().toISOString():null});
     localStorage.setItem("hr_requests",JSON.stringify(all));
     refresh();setShowNew(false);
     setForm({type:"leave",title:"",details:"",startDate:"",endDate:"",days:"",amount:""});
   };
   var canAct=function(req){
-    if(role==="admin")return req.status==="manager_approved";
-    if(role==="manager")return req.status==="pending"&&req.employeeId!==cu.id;
+    if(role==="admin")return req.status==="manager_approved"||(req.status==="pending"&&req.employeeRole==="manager");
+    if(role==="manager")return req.status==="pending"&&req.employeeId!==cu.id&&req.employeeRole!=="admin";
     return false;
   };
   var doAction=function(req,approved){
@@ -259,8 +267,8 @@ var Requests=function(){
   };
   var myR=reqs.filter(function(r){return r.employeeId===cu.id;});
   var pendR=reqs.filter(function(r){
-    if(role==="admin")return r.status==="manager_approved";
-    if(role==="manager")return r.status==="pending"&&r.employeeId!==cu.id;
+    if(role==="admin")return r.status==="manager_approved"||(r.status==="pending"&&r.employeeRole==="manager");
+    if(role==="manager")return r.status==="pending"&&r.employeeId!==cu.id&&r.employeeRole!=="admin";
     return false;
   });
   var shown=tab==="mine"?myR:tab==="pending"?pendR:reqs;
@@ -301,7 +309,14 @@ var Requests=function(){
               o.default.createElement("span",{style:{fontSize:"26px"}},rt.icon),
               o.default.createElement("div",null,
                 o.default.createElement("p",{style:{margin:0,color:u.text,fontSize:"14px",fontWeight:700}},req.title),
-                o.default.createElement("p",{style:{margin:"2px 0 0",color:u.muted,fontSize:"11px"}},rt.label+" • "+req.employeeName+" • "+new Date(req.createdAt).toLocaleDateString("ar-SA")))
+                o.default.createElement("div",null,
+                  o.default.createElement("p",{style:{margin:"2px 0 0",color:u.muted,fontSize:"11px"}},rt.label+" \u2022 "+req.employeeName+(req.employeeDept?" | "+req.employeeDept:"")),
+                  o.default.createElement("div",{style:{display:"flex",gap:"10px",marginTop:"3px",flexWrap:"wrap"}},
+                    req.employeeIdNumber&&o.default.createElement("span",{style:{color:u.teal,fontSize:"10px",fontWeight:600}},"\uD83E\uDEAA "+req.employeeIdNumber),
+                    req.employeePhone&&o.default.createElement("span",{style:{color:u.muted,fontSize:"10px"}},"\uD83D\uDCDE "+req.employeePhone),
+                    req.employeeLocation&&o.default.createElement("span",{style:{color:u.muted,fontSize:"10px"}},"\uD83D\uDCCD "+req.employeeLocation),
+                    o.default.createElement("span",{style:{color:u.muted,fontSize:"10px"}},new Date(req.createdAt).toLocaleDateString("ar-SA"))
+                  )))
             ),
             o.default.createElement("span",{style:{background:st.color+"25",color:st.color,borderRadius:"20px",padding:"4px 12px",fontSize:"11px",fontWeight:700}},st.icon+" "+st.label)
           ),
