@@ -69,7 +69,7 @@ select option{background:#111827;color:#fff}
   if(stored !== VER){
     /* Clear old employee/pharmacy data but keep user prefs */
     var keep = ['__hr_ver','hr_session','hr_theme','hr_lang',
-                'hr_notes','hr_reminders','hr_requests'];
+                'hr_notes','hr_reminders','hr_requests','hr_users','hr_role_perms'];
     Object.keys(localStorage).forEach(function(k){
       if(k.startsWith('hr_') && keep.indexOf(k) === -1){
         localStorage.removeItem(k);
